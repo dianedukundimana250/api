@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json()); 
 app.use(express.json());
-
+const port = 5000; // Adjust port number as needed
 
 // Database credentials
 const pool = mysql.createPool({
@@ -32,7 +32,7 @@ const verifyToken = (req, res, next) => {
 };
 
 app.get('/', (req, res) => {
-  res.send('Hey from API!')
+  res.send('Hey from Api!')
 })
 // Get all data from a roles table
 app.get('/students',verifyToken, async (req, res) => {
@@ -152,4 +152,6 @@ app.post('/login', async (req, res) => {
   }
 });
 
-
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
